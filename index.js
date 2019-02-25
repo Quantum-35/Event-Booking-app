@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const Event = require('./models/event');
-const User = require('./models/user');
 
 
 const app = express();
@@ -23,13 +22,6 @@ app.use('/graphql', graphqlHttp({
       price: Float!
       date: String!
     }
-
-    type User {
-      _id: ID!,
-      username: String!,
-      email: String!,
-      password: String!
-    }
    
     type RootQuery {
       events: [Event!]!
@@ -42,15 +34,8 @@ app.use('/graphql', graphqlHttp({
       date: String!
     }
 
-    input UserInput {
-      username: String!,
-      email: String!,
-      password: String!
-    }
-
     type RootMutation {
       createEvent(eventInput: EventInput): Event
-      createUser(userInput: UserInput): User
     }
 
     schema {
@@ -81,16 +66,6 @@ app.use('/graphql', graphqlHttp({
       return event.save()
         .then((result) => {
           return { ...result._doc }; // mongoose property that return the document object
-        })
-        .catch((err) => {
-          console.log(err);
-          throw err;
-        });
-    },
-    createUser: (args) => {
-      return User.save()
-        .then((result) => {
-          return {...result._doc}
         })
         .catch((err) => {
           console.log(err);
