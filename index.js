@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const graphQlSchema = require('./graphql/schema');
-const resolvers = require('./graphql/resolvers')
+const resolvers = require('./graphql/resolvers');
 
 const app = express();
 
