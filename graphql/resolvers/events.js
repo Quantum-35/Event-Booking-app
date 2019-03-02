@@ -17,13 +17,15 @@ module.exports = {
         throw err;
       });
   },
-  createEvent: (args) => {
+  createEvent: (args, req) => {
+    if (!req.isAuth) throw new Error(' You are not Authorized to perform this action.');
+
     const newEvent = new Event({
       title: args.eventInput.title,
       description: args.eventInput.description,
       price: +args.eventInput.price,
       date: new Date(args.eventInput.date),
-      creator: '5c73ffdb600bfe193e3d30c4',
+      creator: req.userId,
     });
     let createdEvent;
     return newEvent.save()
@@ -35,7 +37,7 @@ module.exports = {
           date: convertRawDateToISO(result._doc.date),
           creator: getUser.bind(this, result._doc.creator),
         };
-        return User.findById('5c73ffdb600bfe193e3d30c4');
+        return User.findById(req.userId);
       })
       .then((user) => {
         if (!user) {

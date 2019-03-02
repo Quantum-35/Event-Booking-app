@@ -6,11 +6,13 @@ require('dotenv').config();
 
 const graphQlSchema = require('./graphql/schema');
 const rootResolver = require('./graphql/resolvers');
+const isAuth = require('./middlewares/is-auth');
 
 const app = express();
 
 app.use(bodyParser.json());
 
+app.use(isAuth);
 app.use('/graphql', graphqlHttp({
   schema: graphQlSchema,
   rootValue: rootResolver,
