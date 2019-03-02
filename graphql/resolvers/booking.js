@@ -5,7 +5,9 @@ const { fetchSingleEvent, getUser } = require('./mergeData');
 
 
 module.exports = {
-  bookings: async () => {
+  bookings: async (args, req) => {
+    if (!req.isAuth) throw new Error(' You are not Authorized to perform this action.');
+
     try {
       const bookings = await Booking.find();
       return bookings.map((booking) => {
@@ -22,11 +24,13 @@ module.exports = {
       throw error;
     }
   },
-  bookEvent: async (args) => {
+  bookEvent: async (args, req) => {
+    if (!req.isAuth) throw new Error(' You are not Authorized to perform this action.');
+
     try {
       const fetchedEvent = await Event.findOne({ _id: args.eventId });
       const newBooking = new Booking({
-        user: '5c73ffdb600bfe193e3d30c4',
+        user: req.userId,
         event: fetchedEvent,
       });
       const results = await newBooking.save();
@@ -40,7 +44,9 @@ module.exports = {
       throw error;
     }
   },
-  cancelBooking: async (args) => {
+  cancelBooking: async (args, req) => {
+    if (!req.isAuth) throw new Error(' You are not Authorized to perform this action.');
+
     try {
       const booking = await Booking.findById({ _id: args.bookingId }).populate('event');
       const bookedEvent = {
