@@ -1,0 +1,16 @@
+ version: '3'
+ services:
+  app:
+    container_name: graphql-event-booking
+    restart: always
+    build: . # Runs Dockerfile
+    ports:
+      - '3001:3001'
+    links:
+      - mongo # Link our App service to our mongo service
+  mongo:
+    container_name: mongo-event-booking
+    image: mongo # pull the mongo image on docker-hub
+    ports:
+      - '27017:27017'
+    
