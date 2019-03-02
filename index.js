@@ -19,5 +19,9 @@ app.use('/graphql', graphqlHttp({
   graphiql: true,
 }));
 
-mongoose.connect(process.env.DB_URL, { useNewUrlParser: true });
+console.log(process.env.NODE_ENV);
+
+mongoose.connect(process.env.DB_URL, { useNewUrlParser: true })
+  .then(() => console.log('Connected to Db'))
+  .catch(err => console.log('===>', err));
 app.listen(3001, () => console.log('Server running at port 3001'));
