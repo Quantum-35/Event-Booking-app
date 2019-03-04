@@ -12,6 +12,7 @@ import MainNavigation from './components/Navigation/MainNavigation';
 
 class App extends Component {
   render() {
+    console.log(process.env)
     return (
       <Provider store={Store}>
         <BrowserRouter>
