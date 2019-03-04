@@ -10,7 +10,19 @@ const isAuth = require('./middlewares/is-auth');
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use(
+  bodyParser.json(),
+);
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
 
 app.use(isAuth);
 app.use('/graphql', graphqlHttp({
@@ -18,8 +30,6 @@ app.use('/graphql', graphqlHttp({
   rootValue: rootResolver,
   graphiql: true,
 }));
-
-console.log(process.env.NODE_ENV);
 
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true })
   .then(() => console.log('Connected to Db'))
