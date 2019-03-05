@@ -9,10 +9,10 @@ import HomePage from './containers/Home/HomePage';
 import Events from './containers/Events/Events';
 import Booking from './containers/Booking/Booking';
 import MainNavigation from './components/Navigation/MainNavigation';
+import PrivateRoute from './utils/PrivateRoute';
 
 class App extends Component {
   render() {
-    console.log(process.env)
     return (
       <Provider store={Store}>
         <BrowserRouter>
@@ -22,8 +22,8 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" component={HomePage}/>
                 <Route path="/auth" component={AuthComponent}/>
-                <Route path="/events" component={Events}/>
-                <Route path="/bookings" component={Booking}/>
+                <PrivateRoute path="/events" component={Events}/>
+                <PrivateRoute path="/bookings" component={Booking}/>
               </Switch>
             </main>
           </React.Fragment>

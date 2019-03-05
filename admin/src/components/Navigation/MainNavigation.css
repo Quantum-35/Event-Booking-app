@@ -16,7 +16,7 @@
 }
 
 .main-navigation__items {
-    margin-left: 63rem;
+    margin-left: 62rem;
 }
 
 .main-navigation__items ul {
@@ -30,18 +30,24 @@
     margin: 0 1rem;
 }
 
-.main-navigation__items a {
+.main-navigation__items a,
+.main-navigation__items button {
     text-decoration: none;
     color: gray;
     font: 1.5rem solid;
+    cursor: pointer;
+    background-color: rgb(43, 31, 110);
+    border: none;
 }
 
 .main-navigation__items a:hover,
 .main-navigation__items a:active,
-.main-navigation__items a.active {
+.main-navigation__items a.active,
+.main-navigation__items button:hover {
     color: aqua;
 }
 
-.main-navigation__items a:hover {
+.main-navigation__items a:hover,
+.main-navigation__items button:hover {
     text-decoration: underline;
 }

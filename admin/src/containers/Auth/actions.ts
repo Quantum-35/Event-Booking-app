@@ -8,7 +8,6 @@ import {
     SIGNIN_SUCCESS,
     SIGNIN_USER
 } from './constants';
-import { type } from 'os';
 
 
 export const signupUser = () => ({type: SIGNUP_USER});
@@ -37,10 +36,11 @@ export const signup = (payload: any) => (dispatch) => {
         `
     };
     const inputData:any = JSON.stringify(resBody);
+    console.log(inputData);
     axiosConfig('POST', '/graphql', inputData)
     .then(res => {
         if (res.status !== 200 && res.status !== 201){
-            dispatch(signupFailed('Network Error'));
+            dispatch(signupFailed(res.data));
             throw new Error('Network Error');
         };
         if (res.data.errors) {
@@ -70,9 +70,9 @@ export const signinSuccess = (signinData) => ({
     signinData
 });
 
-export const signin = (payload: any) => (dispatch) => {
+export const signin = (payload:any) => (dispatch) => {
     dispatch(signinUser());
-    const {email, password} = payload;
+    const {email, password, history} = payload;
     const resBody = {
         query: `
             query {
@@ -86,7 +86,7 @@ export const signin = (payload: any) => (dispatch) => {
     };
     const inputData = JSON.stringify(resBody);
     axiosConfig('POST', '/graphql', inputData)
-    .then(res => {
+    .then(async (res) => {
         if (res.status !== 200 && res.status !== 201){
             dispatch(signupFailed('Network Error'));
             throw new Error('Network Error');
@@ -96,7 +96,13 @@ export const signin = (payload: any) => (dispatch) => {
             dispatch(signinFailed(res.data.errors[0]));
             return;
         }
+        await localStorage.setItem('userData', JSON.stringify(res.data));
+        const udata:any = await localStorage.getItem('userData');
+        const k = await JSON.parse(udata);
+        console.log(k);
+        await localStorage.setItem('access_token',k.data.login.token);
         dispatch(signinSuccess(res.data));
+        history.push('/events');
     })
     .catch(error => {
         dispatch(signinFailed(error));

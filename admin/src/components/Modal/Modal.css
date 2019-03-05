@@ -1,0 +1,53 @@
+.modal {
+    width: 90%;
+    background: white;
+    box-shadow: 0px 2px 8px rgb(0, 0, 0, 0.26);
+    position: fixed;
+    top: 20vh;
+    left: 5%;
+}
+
+@media(min-width: 768px) {
+    .modal {
+        width: 40rem;
+        left: calc((100% - 40rem)/2);
+    }
+}
+
+.modal__header {
+    padding: 1rem;
+    background: #5101d1;
+    color: white;
+}
+
+.modal__header h1 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.modal__content {
+    padding: 1rem;
+    padding-bottom: 0;
+}
+
+.modal__actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 4rem;
+}
+
+.btn_modal {
+    cursor: pointer;
+    background-color: rgb(73, 53, 185);
+    border: none;
+    text-decoration: none;
+    color: rgb(236, 230, 230);
+    font: 1.2rem solid;
+    padding: 0.3rem 1rem;
+    margin: 1rem;
+    border-radius: 0.5rem;
+}
+
+.btn_modal:hover {
+    color: aqua;
+}
