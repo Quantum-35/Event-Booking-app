@@ -1,0 +1,41 @@
+.events-control {
+    border: 1px solid #5101d1;
+    text-align: center;
+    width: 30rem;
+    max-width: 80%;
+    padding: 1rem;
+    margin: 2rem auto;
+}
+
+.btn-create-event {
+    cursor: pointer;
+    background-color: rgb(73, 53, 185);
+    border: none;
+    text-decoration: none;
+    color: rgb(236, 230, 230);
+    font: 1.2rem solid;
+    padding: 0.3rem;
+    border-radius: 0.5rem;
+}
+
+.btn-create-event:hover {
+    color: aqua;
+}
+
+.event-form {
+    width: 40rem;
+    max-width: 80%;
+    margin: 2rem auto;
+    font: 1rem; 
+}
+
+.form-control textarea {
+    display: block;
+    resize: none;
+    width: 30rem;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0.75);
+    border-style: outset;
+    font-weight: 500;
+    font: inherit;
+}
