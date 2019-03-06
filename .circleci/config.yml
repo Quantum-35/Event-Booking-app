@@ -21,7 +21,7 @@ jobs:
       - save_cache: # special step to save the dependency cache
           key: v1-dependencies-{{ checksum "./admin/package.json" }}
           paths:
-            - ./node_modules
+            - ./admin/node_modules
       - run: # run tests
           name: Run Test and Coverage
           command: |
