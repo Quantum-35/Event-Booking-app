@@ -5,7 +5,7 @@ jobs:
       - image: circleci/node:10
     steps:
       - checkout
-      - working_directory: ~/admin
+      working_directory: ~/admin
       - run:
         command: ls -la
       - restore_cache: # special step to restore the dependency cache
