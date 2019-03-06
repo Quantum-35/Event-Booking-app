@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 
-export default class Booking extends Component {
+export  class Booking extends Component {
   render() {
     return (
-      <div>
+      <div className='booking'>
         <h1>Welcome to Booking Page</h1>
       </div>
     )
   }
 }
+
+export default Booking;

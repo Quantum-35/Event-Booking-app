@@ -8,14 +8,14 @@ import BackDrop from '../../components/Backdrop/Backdrop';
 import './Events.css';
 import EventItem from './EventItem';
 
-interface iProps {
+export interface iProps {
   fetchEvents: (body: any) => void;
   createEvent: (body: any) => void;
   events: any;
   history: any;
 }
 
-class Events extends PureComponent<iProps> {
+export class Events extends PureComponent<iProps> {
   state = {
     createEvent: false,
     title: null,
@@ -114,10 +114,10 @@ class Events extends PureComponent<iProps> {
   }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   events: state
 });
-const mapDispatchToProps = dispatch => bindActionCreators({
+export const mapDispatchToProps = dispatch => bindActionCreators({
   fetchEvents: fetchEvent,
   createEvent
 }, dispatch);
