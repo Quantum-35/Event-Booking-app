@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run:
-          command: ls
+          command: cd /admin
       - restore_cache: # special step to restore the dependency cache
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
