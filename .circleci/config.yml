@@ -24,8 +24,8 @@ jobs:
             - ./admin/node_modules
       - run: # run tests
           name: Run Test and Coverage
-          command: ls -la
           command: |
+            ls -la
             ./cc-test-reporter before-build
             yarn run test -- --coverage
             ./cc-test-reporter after-build --exit-code $?
