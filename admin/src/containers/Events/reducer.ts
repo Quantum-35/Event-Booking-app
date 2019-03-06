@@ -1,7 +1,12 @@
 import {
     FETCHING_EVENT,
     FETCHING_EVENT_FAILED,
-    FETCHING_EVENT_SUCCESS } from './constants'
+    FETCHING_EVENT_SUCCESS,
+    CREATING_EVENT,
+    CREATING_EVENT_FAILED,
+    CREATING_EVENT_SUCCESS
+ } from './constants'
+import { stat } from 'fs';
 
 export interface State {
     payload: [],
@@ -38,6 +43,24 @@ export default (state = initialState, action): State => {
                 success: true,
                 loading: false,
                 payload: action.payload
+            }
+        case CREATING_EVENT:
+            return {
+                ...state,
+                loading: true,
+            }
+        case CREATING_EVENT_FAILED:
+            return {
+                ...state,
+                failed: true,
+                errors: action.createEventErrors
+            }
+        case CREATING_EVENT_SUCCESS:
+            return {
+                ...state,
+                success: true,
+                loading: false,
+                payload: action.createEventData
             }
         default:
             return {...state}

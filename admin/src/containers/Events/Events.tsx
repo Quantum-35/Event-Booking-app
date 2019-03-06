@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -6,14 +6,16 @@ import { fetchEvent, createEvent  } from './actions';
 import Modal from '../../components/Modal/Modal';
 import BackDrop from '../../components/Backdrop/Backdrop';
 import './Events.css';
-import { async } from 'q';
+import EventItem from './EventItem';
 
 interface iProps {
   fetchEvents: (body: any) => void;
   createEvent: (body: any) => void;
+  events: any;
+  history: any;
 }
 
-class Events extends Component<iProps> {
+class Events extends PureComponent<iProps> {
   state = {
     createEvent: false,
     title: null,
@@ -54,12 +56,14 @@ class Events extends Component<iProps> {
       return;
     }
     try {
-      console.log(parseFloat(price).toFixed(2));
+      const newPrice =parseFloat(price).toFixed(2);
+      const history = this.props;
       const data = {
         title,
-        price,
+        newPrice,
         date,
-        description
+        description,
+        history
       }
       await createEvent(data);
       this.setState({createEvent: false});
@@ -70,6 +74,13 @@ class Events extends Component<iProps> {
 
   render() {
     const { createEvent } = this.state;
+    const { payload } = this.props.events.eventReducer;
+    let eventsData;
+    if(payload.data){
+      eventsData = payload.data.events.slice(0).reverse().map(event => {
+        return <EventItem key={event._id} data={event}/>
+      });
+    }
     return (
       <React.Fragment>
         {createEvent && <BackDrop />}
@@ -97,6 +108,7 @@ class Events extends Component<iProps> {
           <p>Share your own Events !!!</p>
           <button className="btn-create-event" onClick={this.handleCreateEvent}>Create event</button>
         </div>
+        {eventsData}
       </React.Fragment>
     )
   }

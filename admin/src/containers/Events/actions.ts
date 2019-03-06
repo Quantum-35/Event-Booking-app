@@ -26,12 +26,12 @@ export const creatingEvent = () => ({type: CREATING_EVENT});
 
 export const creatingEventFailed = (errors) => ({
     type: CREATING_EVENT_FAILED,
-    errors
+    createEventErrors: errors
 });
 
 export const creatingEventSuccess = (payload) => ({
     type: CREATING_EVENT_SUCCESS,
-    payload
+    createEventData: payload
 });
 
 
@@ -77,12 +77,12 @@ export const fetchEvent = (payload=null) => (dispatch) => {
 }
 
 export const createEvent = (payload) => (dispatch) => {
-    const { title, price, date, description } = payload;
+    const { title, newPrice, date, description, history } = payload;
     dispatch(creatingEvent());
     const resBody = {
         query: `
             mutation {
-                createEvent(eventInput: { title: "${title}", description: "${description}", price: ${price}, date: "${date}" }) {
+                createEvent(eventInput: { title: "${title}", description: "${description}", price: ${newPrice}, date: "${date}" }) {
                     _id
                     title
                     description
@@ -95,7 +95,6 @@ export const createEvent = (payload) => (dispatch) => {
         `
     };
     const token = localStorage.getItem('access_token');
-    console.log('<<<<<###',token);
     // axiosConfig('POST', '/graphql', JSON.stringify(resBody))
     fetch(`${process.env.REACT_APP_BASE_URL}graphql`, {
         method: 'POST',
@@ -112,12 +111,12 @@ export const createEvent = (payload) => (dispatch) => {
         return res.json();
     })
     .then(res => {
-        console.log('====>',res.errors)
         if(res.errors) {
             dispatch(creatingEventFailed(res.errors));
             return;
         }
         dispatch(creatingEventSuccess(res.data));
+        history.push('/events');
     })
     .catch(error => {
         dispatch(creatingEventFailed(error));

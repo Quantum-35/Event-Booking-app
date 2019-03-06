@@ -39,3 +39,27 @@
     font-weight: 500;
     font: inherit;
 }
+
+.events-list{
+   width: 40rem;
+   max-width: 80%;
+   border: 1px solid  #5101d1;
+   text-align: center;
+   margin: 1rem auto;
+   padding: 1rem;
+}
+
+.events-list__title {
+    font-size: 1.3rem;
+    font-weight: bolder;
+    display: flex;
+    justify-content: center;
+    text-decoration: underline;
+    color: rgb(73, 53, 185);
+}
+
+.events-list__description {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0.3rem;
+}
