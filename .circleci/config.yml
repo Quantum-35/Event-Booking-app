@@ -6,6 +6,7 @@ jobs:
     working_directory: ~/repo/admin
     steps:
       - checkout
+      - run: ls -l ~/repo
       - restore_cache: # special step to restore the dependency cache
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
