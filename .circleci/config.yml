@@ -6,7 +6,7 @@ jobs:
     working_directory: ~/repo/admin
     steps:
       - checkout
-      -run:
+      - run:
         command: ls
       - restore_cache: # special step to restore the dependency cache
           keys:
