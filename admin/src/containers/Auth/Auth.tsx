@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 import './Auth.css';
 import { signup, signin } from './actions';
 
-interface iProp {
+export interface iProp {
   signupUser: (body: any) => void;
   signInUser: (body: any) => void;
   userData: any;
@@ -43,7 +43,7 @@ export  class Auth extends React.Component<iProp, {}> {
       try {
          await signInUser(data);
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
       return;
     }
@@ -62,7 +62,7 @@ export  class Auth extends React.Component<iProp, {}> {
       this.setState({isLogin: true});
       return;
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   }
   
@@ -71,16 +71,16 @@ export  class Auth extends React.Component<iProp, {}> {
   }
   
 
-  saveDataToLocalStorage = (key, value) => {
-    return localStorage.setItem(key, value);
-  }
+  // saveDataToLocalStorage = (key, value) => {
+  //   return localStorage.setItem(key, value);
+  // }
   
   render() {
     const {isLogin} = this.state;
     const { data } = this.props.userData.authReducer.payload;
     if (data) {
       if(data.login){
-      this.saveDataToLocalStorage('userDD', JSON.stringify(data.login));
+      // this.saveDataToLocalStorage('userDD', JSON.stringify(data.login));
       // this.saveDataToLocalStorage('access_token', JSON.stringify(data.login.token));
     }
   }
@@ -101,7 +101,7 @@ export  class Auth extends React.Component<iProp, {}> {
           <input type="password" name='password' id="password" required onChange={this.handleChange}/>
         </div>
         <div className="form-actions">
-          <button type="submit" > {isLogin ? 'Login' :'Signup'} </button>
+          <button type="submit" className='btn-submit'> {isLogin ? 'Login' :'Signup'} </button>
           <button type='button' onClick={this.handleSignIn} > {isLogin?'Siwtch to Signup': 'Switch to Signin'}</button>
         </div>
       </form>
@@ -109,10 +109,10 @@ export  class Auth extends React.Component<iProp, {}> {
   }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   userData: state
 });
-const mapDispatchToProps = dispatch => bindActionCreators({
+export const mapDispatchToProps = dispatch => bindActionCreators({
   signupUser: signup,
   signInUser: signin
 }, dispatch);

@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function About() {
+export const About =() =>{
   return (
-    <div>
+    <div className="about-page">
       This is the About Page. 
     </div>
   )

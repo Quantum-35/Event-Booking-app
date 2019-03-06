@@ -2,7 +2,7 @@ import React from 'react';
 
 import './Events.css';
 
-const EventItem = (props) => {
+export const EventItem = (props) => {
     const {title, description, date} = props.data;
   return (
     <div>

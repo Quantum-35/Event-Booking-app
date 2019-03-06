@@ -6,7 +6,7 @@ import "./MainNavigation.css";
 interface iProps {
   // history: any;
 }
-export default class MainNavigation extends React.Component<iProps> {
+export  class MainNavigation extends React.Component<iProps> {
   handleLogout = () => {
     localStorage.removeItem('access_token');
     window.location.href = '/';
@@ -30,7 +30,7 @@ export default class MainNavigation extends React.Component<iProps> {
                   }
                   {
                     token?
-                      <li><button type='button' onClick={this.handleLogout}>Logout </button></li>
+                      <li><button type='button' className="logout-btn" onClick={this.handleLogout}>Logout </button></li>
                     : 
                     <li><NavLink to='/auth'>Signup / Signin </NavLink></li>
                   }
@@ -40,3 +40,5 @@ export default class MainNavigation extends React.Component<iProps> {
     )
   }
 }
+
+export default MainNavigation;
