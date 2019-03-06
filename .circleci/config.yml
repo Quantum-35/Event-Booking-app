@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:10
-    working_directory: ~/admin
+    working_directory: ~/repo
     steps:
       - checkout
       - restore_cache: # special step to restore the dependency cache
