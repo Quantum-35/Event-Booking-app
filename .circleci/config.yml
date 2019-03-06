@@ -8,7 +8,7 @@ jobs:
       - checkout
 
       - run:
-        command: ls /home/circleci/admin/
+          command: ls /home/circleci/admin/
 
       - restore_cache:
           keys: v1-dependencies-{{ checksum "package.json" }}
