@@ -3,13 +3,14 @@ jobs:
   build:
     docker:
       - image: circleci/node:10
-    working_directory: ~/repo/admin
     steps:
+      working_directory: ~/admin
       - checkout
-      - run: ls -l ~/repo
+      - run:
+        command: ls -la
       - restore_cache: # special step to restore the dependency cache
           keys:
-            - v1-dependencies-{{ checksum "./admin/package.json" }}
+            - v1-dependencies-{{ checksum "./package.json" }}
       - run:
           name: Setup Dependencies
           command: yarn install
