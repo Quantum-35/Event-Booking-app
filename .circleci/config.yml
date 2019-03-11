@@ -3,6 +3,8 @@ jobs:
   build:
     docker:
       - image: circleci/node:10
+      - environment:
+          CC_TEST_REPORTER_ID: ${CC_TEST_REPORTER_ID}
     working_directory: ~/admin
     steps:
       - checkout
