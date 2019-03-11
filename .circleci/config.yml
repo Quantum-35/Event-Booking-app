@@ -3,11 +3,10 @@ jobs:
   build:
     docker:
       - image: circleci/node:10
-      - working_directory: ~/admin
+    - working_directory: ~/admin
     steps:
       - checkout
       - run:
-          
           command: ls -la
       - restore_cache: # special step to restore the dependency cache
           keys:
