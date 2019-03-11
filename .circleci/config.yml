@@ -13,7 +13,9 @@ jobs:
             - v1-dependencies-{{ checksum "./admin/package.json" }}
       - run:
           name: Setup Dependencies
-          command: yarn install
+          command: |
+            cd ~/admin/admin
+            yarn install
       - run:
           name: Setup Code Climate test-reporter
           command: |
