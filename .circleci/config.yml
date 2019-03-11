@@ -3,10 +3,11 @@ jobs:
   build:
     docker:
       - image: circleci/node:10
+      - working_directory: ~/admin
     steps:
       - checkout
       - run:
-          working_directory: ~/admin
+          
           command: ls -la
       - restore_cache: # special step to restore the dependency cache
           keys:
@@ -26,7 +27,7 @@ jobs:
       - run: # run tests
           name: Run Test and Coverage
           command: |
-            cd ~/admin
+            cd ~/admin/admin
             ls -la
             ./cc-test-reporter before-build
             yarn run test -- --coverage
