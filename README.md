@@ -1,5 +1,8 @@
 ### Welcome to Event Booking App
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/6a13f771d06dda78b99e/maintainability)](https://codeclimate.com/github/Quantum-35/Event-Booking-app/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/6a13f771d06dda78b99e/test_coverage)](https://codeclimate.com/github/Quantum-35/Event-Booking-app/test_coverage)
+
 This app is enables logged in users to book and cancel an event.
 
 ### Running the App
