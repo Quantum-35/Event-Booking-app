@@ -1,0 +1,38 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10
+        environment:
+          CC_TEST_REPORTER_ID: ${CC_TEST_REPORTER_ID}
+    working_directory: ~/admin
+    steps:
+      - checkout
+      - run:
+          command: ls -la
+      - restore_cache: # special step to restore the dependency cache
+          keys:
+            - v1-dependencies-{{ checksum "./admin/package.json" }}
+      - run:
+          name: Setup Dependencies
+          command: |
+            cd ~/admin/admin
+            yarn install
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            cd ~/admin/admin
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      - save_cache: # special step to save the dependency cache
+          key: v1-dependencies-{{ checksum "./admin/package.json" }}
+          paths:
+            - ./admin/node_modules
+      - run: # run tests
+          name: Run Test and Coverage
+          command: |
+            cd ~/admin/admin
+            ls -la
+            ./cc-test-reporter before-build
+            yarn run test -- --coverage
+            ./cc-test-reporter after-build --exit-code $?
